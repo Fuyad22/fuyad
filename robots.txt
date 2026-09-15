@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fuyad22.github.io/sitemap.xml
+Sitemap: https://fuyad22.github.io/fuyad/sitemap.xml
