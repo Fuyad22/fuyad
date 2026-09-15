@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Hero rotating role text */
   const roleText = document.getElementById('roleText');
   if (roleText && !reduceMotion) {
-    const roles = ['Full-Stack Developer', 'Flutter Developer', 'Founder @ Futels', 'ML Tinkerer'];
+    const roles = ['Full-Stack Developer', 'BSc CSE Student', 'Flutter Developer', 'Founder @ Futels', 'ML Tinkerer'];
     let idx = 0;
     roleText.style.transition = 'opacity .3s ease';
     setInterval(() => {
@@ -177,18 +177,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* Copy email to clipboard */
-  const emailCopy = document.getElementById('emailCopy');
-  if (emailCopy) {
-    emailCopy.addEventListener('click', async () => {
-      const email = emailCopy.dataset.email;
+  document.querySelectorAll('.email-copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const email = btn.dataset.email;
       try {
         await navigator.clipboard.writeText(email);
         showToast('Email copied to clipboard');
       } catch (err) {
         showToast('Copy failed — email: ' + email);
       }
-      emailCopy.classList.add('is-copied');
-      setTimeout(() => emailCopy.classList.remove('is-copied'), 1500);
+      btn.classList.add('is-copied');
+      setTimeout(() => btn.classList.remove('is-copied'), 1500);
     });
-  }
+  });
 });
