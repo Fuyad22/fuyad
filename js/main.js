@@ -14,6 +14,10 @@
     try { fn(); } catch (err) { console.error(`[portfolio] ${name} failed`, err); }
   };
   const mixColor = (a, b, t) => `rgb(${a.map((v, k) => Math.round(v + (b[k] - v) * t)).join(', ')})`;
+  const themeRGB = (name) => {
+    const hex = getComputedStyle(root).getPropertyValue(name).trim().replace('#', '');
+    return [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  };
 
   /* ---------- Motion preference (OS setting + footer switch) ---------- */
   const MOTION_KEY = 'fh-motion';
@@ -58,6 +62,8 @@
     const visual = document.createElement('span');
     visual.className = 'split';
     visual.setAttribute('aria-hidden', 'true');
+    const gradFrom = themeRGB('--accent');
+    const gradTo = themeRGB('--accent-3');
     let i = 0;
     words.forEach((word, wi) => {
       const w = document.createElement('span');
@@ -70,7 +76,7 @@
         c.textContent = ch;
         c.style.setProperty('--i', String(i++));
         if (gradient) {
-          c.style.setProperty('--c', mixColor([129, 140, 248], [34, 211, 238], chars.length > 1 ? ci / (chars.length - 1) : 0));
+          c.style.setProperty('--c', mixColor(gradFrom, gradTo, chars.length > 1 ? ci / (chars.length - 1) : 0));
         }
         w.appendChild(c);
       });
@@ -344,7 +350,8 @@
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const STOPS = [[99, 102, 241], [168, 85, 247], [34, 211, 238]];
+    const STOPS = [themeRGB('--accent'), themeRGB('--accent-2'), themeRGB('--accent-3')];
+    const INK = `rgb(${themeRGB('--text').join(', ')})`;
     const colorAt = (t) => (t < 0.5 ? mixColor(STOPS[0], STOPS[1], t * 2) : mixColor(STOPS[1], STOPS[2], (t - 0.5) * 2));
     const mouse = { x: 0, y: 0, tx: 0, ty: 0, on: false, s: 0 };
     const ripples = [];
@@ -403,7 +410,7 @@
       const time = now * 0.0011;
       const nr = live ? ripples.length : 0;
       hot.length = 0;
-      ctx.fillStyle = '#fff';
+      ctx.fillStyle = INK;
 
       let k = 0;
       for (let c = 0; c < cols; c++) {
@@ -446,7 +453,7 @@
             continue;
           }
           const wave = live ? 0.5 + 0.5 * Math.sin(x * 0.0105 + y * 0.0075 - time) : 0.4;
-          ctx.globalAlpha = 0.07 + 0.11 * wave * wave * wave;
+          ctx.globalAlpha = 0.08 + 0.12 * wave * wave * wave;
           ctx.fillRect(x - 0.8, y - 0.8, 1.6, 1.6);
         }
       }
