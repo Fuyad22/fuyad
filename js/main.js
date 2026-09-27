@@ -1028,7 +1028,7 @@
       }]),
       { group: 'Links', label: 'GitHub profile', icon: 'user', run: () => openUrl('https://github.com/Fuyad22') },
       { group: 'Links', label: 'LinkedIn profile', icon: 'user', run: () => openUrl('https://www.linkedin.com/in/fuyad-hassan/') },
-      { group: 'Links', label: 'MUBUS — source', keywords: 'flutter bus tracker', icon: 'external', run: () => openUrl('https://github.com/Fuyad22/MUBUS') },
+      { group: 'Links', label: 'MUBUS — live app', keywords: 'flutter bus tracker', icon: 'external', run: () => openUrl('https://fuyad22.github.io/MUBUS/') },
       { group: 'Links', label: 'Fake News Detector — source', keywords: 'python ml', icon: 'external', run: () => openUrl('https://github.com/Fuyad22/Fake-News-Detector') },
       { group: 'Links', label: 'Rent House — source', keywords: 'vue', icon: 'external', run: () => openUrl('https://github.com/Fuyad22/Rent_House') },
       { group: 'Links', label: 'Student Enrollment System — source', keywords: 'java swing', icon: 'external', run: () => openUrl('https://github.com/Fuyad22/Student_Enrollment_Project') },
