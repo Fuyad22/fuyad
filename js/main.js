@@ -303,7 +303,7 @@
       el.addEventListener('pointerleave', () => { el.style.transform = ''; });
     });
 
-    const tilt = (el, max, glare) => {
+    const tilt = (el, max) => {
       let rect = null;
       el.addEventListener('pointerenter', () => { rect = el.getBoundingClientRect(); });
       el.addEventListener('pointermove', (e) => {
@@ -312,15 +312,11 @@
         const px = (e.clientX - rect.left) / rect.width;
         const py = (e.clientY - rect.top) / rect.height;
         el.style.transform = `perspective(1000px) rotateX(${((0.5 - py) * max).toFixed(2)}deg) rotateY(${((px - 0.5) * max * 1.2).toFixed(2)}deg)`;
-        if (glare) {
-          glare.style.setProperty('--gx', `${(px * 100).toFixed(1)}%`);
-          glare.style.setProperty('--gy', `${(py * 100).toFixed(1)}%`);
-        }
       });
       el.addEventListener('pointerleave', () => { el.style.transform = ''; rect = null; });
     };
     const photo = $('#photoTilt');
-    if (photo) tilt(photo, 10, $('.hero__photo-glare'));
+    if (photo) tilt(photo, 10);
     $$('.tilt').forEach((el) => tilt(el, 5));
 
     $$('.glow-group').forEach((group) => {
