@@ -14,11 +14,13 @@ npx serve .
 
 - `index.html` — all page content/sections
 - `css/styles.css` — design tokens, layout, components, animations
-- `js/main.js` — scroll reveals, nav behavior, cursor spotlight, magnetic buttons, card tilt, email copy
+- `js/main.js` — interactive hero dot field, text animations, scroll reveals, pill nav,
+  project filters, command palette (Ctrl/⌘ K), live GitHub repo count, animations on/off switch
 - `assets/` — favicon and other static assets
+
+All motion respects `prefers-reduced-motion` and the footer "Animations" switch.
 
 ## Deploy
 
-Push this folder to a repo named `<username>.github.io` and enable GitHub Pages
-(Settings → Pages → Deploy from branch `main` / root) for a live site with no
-extra path.
+Served by GitHub Pages from the `Fuyad22/fuyad` repo (branch `main`, root) at
+https://fuyad22.github.io/fuyad/.
