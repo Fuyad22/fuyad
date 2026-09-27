@@ -137,7 +137,7 @@
   const revealAll = () => revealTargets.forEach((el) => el.classList.add('is-visible'));
   safely('reveal', () => {
     $$('.skill-card').forEach((card) => {
-      $$('.tag', card).forEach((tag, i) => tag.style.setProperty('--td', `${(0.25 + i * 0.045).toFixed(3)}s`));
+      $$('.tag, .cert', card).forEach((tag, i) => tag.style.setProperty('--td', `${(0.25 + i * 0.045).toFixed(3)}s`));
     });
     if (!('IntersectionObserver' in window) || !motion.ok) { revealAll(); return; }
     const io = new IntersectionObserver((entries) => {
@@ -523,7 +523,7 @@
   safely('role text', () => {
     const el = $('#roleText');
     if (!el) return;
-    const roles = ['Full-Stack Developer', 'BSc CSE Student', 'Flutter Developer', 'Founder @ Futels', 'ML Tinkerer'];
+    const roles = ['Full-Stack Developer', 'ML Developer', 'Flutter Developer', 'BSc SWE Student', 'Founder @ Futels'];
     const glyphs = '!<>-_\\/[]{}=+*^?#01';
     const esc = (s) => s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
     const randomGlyph = () => glyphs[Math.floor(Math.random() * glyphs.length)];
@@ -998,6 +998,7 @@
       mail: svg('<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>'),
       motion: svg('<path d="M3 12h4l3-8 4 16 3-8h4"/>'),
       user: svg('<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'),
+      award: svg('<circle cx="12" cy="8" r="6"/><path d="M15.5 12.9 17 22l-5-3-5 3 1.5-9.1"/>'),
       external: svg('<line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>'),
     };
     const GMAIL = 'https://mail.google.com/mail/?view=cm&fs=1&to=fuyad@neodimensional.com';
@@ -1029,6 +1030,13 @@
       { group: 'Links', label: 'Rent House — source', keywords: 'vue', icon: 'external', run: () => openUrl('https://github.com/Fuyad22/Rent_House') },
       { group: 'Links', label: 'Student Enrollment System — source', keywords: 'java swing', icon: 'external', run: () => openUrl('https://github.com/Fuyad22/Student_Enrollment_Project') },
       { group: 'Links', label: 'StudentLifeHub — live site', keywords: 'html', icon: 'external', run: () => openUrl('https://fuyad22.github.io/StudentLifeHub/') },
+      ...$$('a.cert').map((a) => ({
+        group: 'Certificates',
+        label: $('.cert__name', a).textContent.trim(),
+        keywords: `certificate ${$('.cert__issuer', a).textContent}`,
+        icon: 'award',
+        run: () => openUrl(a.href),
+      })),
     ];
 
     let filtered = [];
